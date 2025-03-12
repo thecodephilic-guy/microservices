@@ -28,7 +28,7 @@ func SendEmail(toEmail string, amount float64, newStatus string) error {
 	e.From = fmt.Sprintf("Notification Service <%s>", senderEmail)
 	e.To = []string{toEmail}
 	e.Subject = "Order Status Update"
-	e.Text = []byte(fmt.Sprintf("Dear Customer,\n\nStatus of payment for amount %.2f is: %s.\n\nThank you for shopping with us!", amount, newStatus))
+	e.Text = []byte(fmt.Sprintf("Dear Customer,\n\n Order Placed!\n\nStatus of payment for amount %.2f is: %s.\n\nThank you for shopping with us!", amount, newStatus))
 
 	// Authenticate and send email
 	auth := smtp.PlainAuth("", senderEmail, senderPassword, smtpHost)
