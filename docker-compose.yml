@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  order-service:
+    build:
+      context: ./order-svc
+      dockerfile: Dockerfile
+      platforms:
+        - "linux/arm64"
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./order-svc/.env
+
+  user-service:
+    build:
+      context: ./user-svc
+      dockerfile: Dockerfile
+      platforms:
+        - "linux/arm64"
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./user-svc/.env
+
+  notification-service:
+    build:
+      context: ./notification-svc
+      dockerfile: Dockerfile
+      platforms:
+        - "linux/arm64"
+    ports:
+      - "8004:8004"
+    env_file:
+      - ./notification-svc/.env
+
+  payment-service:
+    build:
+      context: ./payment-svc
+      dockerfile: Dockerfile
+      platforms:
+        - "linux/arm64"
+    ports:
+      - "8003:8003"
+    env_file:
+      - ./payment-svc/.env
