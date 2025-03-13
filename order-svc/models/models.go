@@ -8,9 +8,9 @@ type Order struct {
 	ID        string    `json:"id,omitempty" gorm:"primaryKey;type:uuid;default:gen_random_uuid()"` // UUID as Primary Key
 	UserID    string    `json:"user_id" gorm:"not null;index"`                                      // Indexed for faster lookup
 	Item      string    `json:"item" gorm:"type:varchar(255);not null"`
-	Amount    int       `json:"amount" gorm:"not null;check:amount >= 0"`                  // Ensuring positive values
-	Status    string    `json:"status" gorm:"type:varchar(50);not null;default:'pending'"` // Default status is 'pending'
-	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`                          // Auto timestamp
+	Amount    int       `json:"amount" gorm:"not null;check:amount >= 0"`                   // Ensuring positive values
+	Status    string    `json:"status,omitempty" gorm:"type:varchar(50);default:'pending'"` // Default status is 'pending'
+	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`                           // Auto timestamp
 	UpdatedAt time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
 

@@ -43,7 +43,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Safe side (making status as pending):
+	//setting the status of the order to pending:
 	order.Status = "pending"
 
 	// Now make a call to payment service to process the payment for this order based on order ID which is running on localhost 8003
@@ -159,14 +159,14 @@ func GetOrder(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	user_id := params["user_id"]
 
-	//creating an instance of struct to hold the data:
-	var order models.Order
+	//creating a slice of struct to hold the data:
+	var orders []models.Order
 
 	//querying the database:
-	result := config.DB.Where("user_id = ?", user_id).First(&order)
+	result := config.DB.Where(&models.Order{UserID: user_id}).Find(&orders)
 
 	//if no order is found with the given id:
-	if len(order.ID) == 0 {
+	if result.RowsAffected == 0 {
 		http.Error(w, `{"message" : "Order not found"}`, http.StatusNotFound)
 		return
 	}
@@ -177,9 +177,9 @@ func GetOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := models.Response{
-		Message:     "Order Found",
-		Explanation: "Order with the given id is found",
-		Data:        order,
+		Message:     "Orders Found",
+		Explanation: "Orders with the given user_id are found",
+		Data:        orders,
 	}
 	json.NewEncoder(w).Encode(response)
 }

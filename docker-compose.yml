@@ -11,6 +11,8 @@ services:
       - "8002:8002"
     env_file:
       - ./order-svc/.env
+    networks:
+      - keploy-network
 
   user-service:
     build:
@@ -22,6 +24,8 @@ services:
       - "8001:8001"
     env_file:
       - ./user-svc/.env
+    networks:
+      - keploy-network
 
   notification-service:
     build:
@@ -33,6 +37,8 @@ services:
       - "8004:8004"
     env_file:
       - ./notification-svc/.env
+    networks:
+      - keploy-network
 
   payment-service:
     build:
@@ -44,3 +50,8 @@ services:
       - "8003:8003"
     env_file:
       - ./payment-svc/.env
+    networks:
+      - keploy-network
+networks:
+  keploy-network:
+    external: true
