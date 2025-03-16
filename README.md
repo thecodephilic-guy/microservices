@@ -108,8 +108,7 @@ The Notification Service is responsible for informing users about their payment 
       {
           "email": "string",
           "order_id": "string",
-          "amount": "string",
-          "status": "string"
+          "amount": "string"
       }
       ``` 
 
@@ -168,7 +167,7 @@ SMTP_PASSWORD=your_email_password
 ### Install Dependencies
 Ensure you have Golang installed, then install dependencies for each service. Navigate into each service directory and run:
 ```bash
-go mod tidy
+go mod download
 ```
 
 ### Run the Services
